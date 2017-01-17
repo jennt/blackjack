@@ -1,11 +1,6 @@
 require 'pry'
-#???first card is an A.to_i??
-# picking hard, soft, hard
-# card to value conversion
-
-# get player card values (both cards)
-# calculate def hard_soft_or_pair(type)
-# evaluate move
+#??aces(hard or soft), def convert_aces
+# picking hard, soft, hard, def soft_hard_or_pair?
 
 def valid_card(card)
   face_cards = ['A', 'K', 'Q', 'J']
@@ -20,6 +15,23 @@ def valid_card(card)
   end
   card
 end
+
+def convert_face_cards(card)
+  values = ['K', 'Q', 'J']
+  if values.include?(card)
+    card = 10
+  end
+  card
+end
+
+def aces(card)
+  aces = ['A']
+  if aces.include?(card)
+    card = 11
+  end
+  card
+end
+
 hard = {
   5 => {
     2 => 'H',
@@ -133,25 +145,28 @@ card = 0
 
   print 'Give me your first card: '
   first_card = gets.chomp
-  # binding.pry
   first_card = valid_card(first_card)
-  # binding.pry
+  first_card = convert_face_cards(first_card)
+  first_card = aces(first_card)
+
   print 'Give me your second card: '
   second_card = gets.chomp
   second_card = valid_card(second_card)
+  second_card = convert_face_cards(second_card)
+  second_card = aces(second_card)
 
   cards_value = first_card.to_i + second_card.to_i
 
   print 'Dealer card: '
   dealer_card = gets.chomp
   dealer_card = valid_card(dealer_card)
+  dealer_card = convert_face_cards(dealer_card)
+  dealer_card = aces(dealer_card)
 
- print "first_card: #{first_card}\n"
- print "second_card: #{second_card}\n"
- print "dealer_card: #{dealer_card}\n"
- print "cards_value: #{cards_value}\n"
-
-# binding.pry
+  print "first_card: #{first_card}\n"
+  print "second_card: #{second_card}\n"
+  print "dealer_card: #{dealer_card}\n"
+  print "cards_value: #{cards_value}\n"
 
 # hard_move = hard[first_card][dealer_card]
 # puts hard_move
